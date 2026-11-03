@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lindsey Sands | Technology Portfolio</title>
+<meta name="description" content="Self-hosted Plex and Navidrome media servers, Linux and Docker projects, and custom PC builds by Lindsey Sands.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%9B%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#eef1f4; --surface:#ffffff; --ink:#14202b; --muted:#51606e; --line:#d5dce3;
+  --blue:#1d5fd6; --amber:#a86a00; --teal:#0b7f70;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Public Sans","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0e151c; --surface:#16202a; --ink:#e8eef3; --muted:#9aa8b5; --line:#263442;
+         --blue:#6aa1ff; --amber:#f0b429; --teal:#3fd0bb; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--head);line-height:1.08;margin:0;letter-spacing:-.02em}
+h2{font-size:clamp(1.7rem,3.6vw,2.3rem);font-weight:800}
+h3{font-size:1.45rem;font-weight:800}
+p{margin:0 0 1rem;max-width:68ch}
+section{padding:56px 0}
+
+/* header */
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;flex-wrap:wrap}
+.brand{font-family:var(--head);font-weight:800;text-decoration:none;font-size:1.1rem}
+nav a{margin-left:22px;text-decoration:none;color:var(--muted);font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+/* hero */
+.hero{padding:48px 0 24px}
+.hero h1{font-size:clamp(2.9rem,9vw,5.6rem);font-weight:800;letter-spacing:-.04em}
+.hero .role{font-family:var(--head);font-weight:600;font-size:clamp(1.15rem,2.6vw,1.5rem);color:var(--muted);margin:14px 0 22px}
+.hero p{font-size:1.08rem}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn:hover{transform:translateY(-1px)}
+
+/* homelab map */
+.map{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px}
+.map h2{margin-bottom:6px}
+.map .sub{color:var(--muted);margin-bottom:26px}
+.lane{display:grid;grid-template-columns:1fr 64px 1fr 64px 1fr;align-items:center;margin-top:18px}
+.lane-label{grid-column:1/-1;font-weight:600;font-size:.95rem;margin-bottom:8px;color:var(--lane)}
+.node{border:2px solid var(--lane);border-radius:12px;padding:14px 16px;background:var(--bg)}
+.node b{display:block;font-weight:600}
+.node span{color:var(--muted);font-size:.9rem}
+.link{height:2px;position:relative;background:repeating-linear-gradient(90deg,var(--lane) 0 8px,transparent 8px 14px);background-size:14px 2px;animation:flow 1.2s linear infinite}
+.link::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:9px solid var(--lane);border-right:0}
+@keyframes flow{to{background-position:14px 0}}
+.lane.plex{--lane:var(--amber)} .lane.music{--lane:var(--blue)}
+
+/* projects */
+.project{margin-top:56px}
+.project header{border-left:6px solid var(--accent);padding-left:16px;margin-bottom:22px}
+.project header p{color:var(--muted);margin:6px 0 0}
+.project.music{--accent:var(--blue)} .project.plex{--accent:var(--amber)} .project.builds{--accent:var(--teal)}
+figure{margin:0 0 24px}
+figure img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#1e2a36}
+figcaption{color:var(--muted);font-size:.88rem;margin-top:8px}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:36px}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+dt{color:var(--muted);font-size:.92rem}
+dd{margin:0;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:6px 0 0;list-style:none}
+.tags li{border:1px solid var(--accent);color:var(--ink);border-radius:999px;padding:3px 12px;font-size:.85rem}
+
+/* areas + process */
+.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0;margin:22px 0 0;list-style:none}
+.areas li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-weight:500}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:0;margin:26px 0 0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;border-top:3px solid var(--teal);padding-top:12px;font-weight:600}
+.steps li::before{content:counter(s) ".";color:var(--muted);margin-right:6px;font-weight:500}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:32px 0 48px;color:var(--muted);font-size:.95rem}
+footer a{color:var(--ink)}
+
+@media (max-width:760px){
+  .lane{grid-template-columns:1fr}
+  .link{width:2px;height:28px;margin:0 0 0 24px;background:repeating-linear-gradient(180deg,var(--lane) 0 8px,transparent 8px 14px);animation:none}
+  .link::after{right:auto;left:-5px;top:auto;bottom:-1px;border:6px solid transparent;border-top:9px solid var(--lane);border-bottom:0}
+  .cols,.areas,.steps{grid-template-columns:1fr 1fr}
+  .cols{grid-template-columns:1fr}
+  nav a{margin:0 18px 0 0}
+}
+@media (max-width:480px){ .areas,.steps{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ .link{animation:none} html{scroll-behavior:auto} .btn:hover{transform:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Lindsey Sands</a>
+    <nav aria-label="Page sections">
+      <a href="#homelab">Homelab</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">How I build</a>
+      <a href="https://github.com/makechristcool">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>Lindsey Sands</h1>
+      <p class="role">Hands-on builder and lifelong learner</p>
+      <p>I’m a Computer Information Systems student who enjoys working out how things work, then building something practical with that knowledge. I run my own media servers, work in Linux and Docker, and design custom PCs. This page shows the projects behind my resume.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projects">See my projects</a>
+        <a class="btn" href="Lindsey_Sands_Technology_Portfolio_v2.pdf">Download the PDF portfolio</a>
+      </div>
+    </div>
+
+    <section id="homelab" aria-labelledby="homelab-h">
+      <div class="map">
+        <h2 id="homelab-h">My homelab</h2>
+        <p class="sub">Two servers on two machines. Arrows show how media gets from storage to the screen.</p>
+
+        <div class="lane plex">
+          <div class="lane-label">Movies and TV</div>
+          <div class="node"><b>External HDD</b><span>Media library</span></div>
+          <div class="link" aria-hidden="true"></div>
+          <div class="node"><b>HP EliteDesk 800 G2 DM</b><span>Plex Media Server on Windows</span></div>
+          <div class="link" aria-hidden="true"></div>
+          <div class="node"><b>Plex apps</b><span>Supported devices</span></div>
+        </div>
+
+        <div class="lane music">
+          <div class="lane-label">Music</div>
+          <div class="node"><b>Ubuntu mini PC</b><span>Docker with Navidrome</span></div>
+          <div class="link" aria-hidden="true"></div>
+          <div class="node"><b>Cloudflare Tunnel</b><span>Custom domain with HTTPS</span></div>
+          <div class="link" aria-hidden="true"></div>
+          <div class="node"><b>Browser and iPhone</b><span>Substreamer app</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-h">
+      <h2 id="projects-h">Projects</h2>
+
+      <article class="project music">
+        <header>
+          <h3>Ubuntu Linux music server</h3>
+          <p>My own streaming service for my music library, running at home.</p>
+        </header>
+        <figure>
+          <img src="docs/screenshots/navidrome-library.png" alt="Navidrome library view showing a grid of album covers" loading="lazy">
+          <figcaption>The Navidrome web interface, served from my mini PC.</figcaption>
+        </figure>
+        <div class="cols">
+          <div>
+            <p>I configured an Ubuntu Linux server with Docker and a custom domain to host and stream my personal music library. It runs on a repurposed mini PC, and I use it from a browser and from my iPhone.</p>
+            <p>A Cloudflare Tunnel makes it reachable over HTTPS without opening any ports on my home router.</p>
+            <ul class="tags">
+              <li>Ubuntu Linux</li><li>Docker</li><li>Navidrome</li><li>Cloudflare</li><li>Self-hosting</li>
+            </ul>
+          </div>
+          <dl>
+            <dt>Server</dt><dd>Ubuntu Linux mini PC</dd>
+            <dt>Runs in</dt><dd>Docker Compose</dd>
+            <dt>Access</dt><dd>Cloudflare Tunnel and a custom domain</dd>
+            <dt>On the go</dt><dd>Substreamer on iPhone</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="project plex">
+        <header>
+          <h3>Plex media server</h3>
+          <p>Movies and shows in one place, ready to stream.</p>
+        </header>
+        <figure>
+          <img src="docs/screenshots/plex-library.png" alt="Plex home screen showing Continue Watching and Recently Added movie posters" loading="lazy">
+          <figcaption>The Plex home screen for my library.</figcaption>
+        </figure>
+        <div class="cols">
+          <div>
+            <p>I built and maintain a self-hosted Plex Media Server so my movies and shows are available on any supported device. The computer is an HP EliteDesk I upgraded myself: more memory and a solid-state drive in place of the original hard drive.</p>
+            <ul class="tags">
+              <li>Plex</li><li>Windows</li><li>Home server</li><li>Hardware upgrades</li>
+            </ul>
+          </div>
+          <dl>
+            <dt>Computer</dt><dd>HP EliteDesk 800 G2 DM</dd>
+            <dt>Processor</dt><dd>Intel Core i5-6600T</dd>
+            <dt>Memory</dt><dd>24 GB, up from 8 GB</dd>
+            <dt>Boot drive</dt><dd>SSD, replacing an HDD</dd>
+            <dt>Software</dt><dd>Plex, installed on Windows</dd>
+            <dt>Library</dt><dd>External HDD</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="project builds">
+        <header>
+          <h3>Custom PC builds and optimization</h3>
+          <p>Getting the most out of the hardware I have.</p>
+        </header>
+        <p>I design high-efficiency custom PC builds, choosing and configuring parts to balance performance against the resources available and how the computer will be used.</p>
+        <ul class="tags">
+          <li>PC hardware</li><li>Custom builds</li><li>Performance optimization</li><li>Gaming</li>
+        </ul>
+      </article>
+    </section>
+
+    <section aria-labelledby="areas-h">
+      <h2 id="areas-h">What I’m exploring next</h2>
+      <ul class="areas">
+        <li>Self-hosting and home labs</li>
+        <li>Linux and containers</li>
+        <li>Generative AI</li>
+        <li>Custom PC hardware</li>
+        <li>Gaming and digital media</li>
+        <li>Technology experiments</li>
+      </ul>
+    </section>
+
+    <section id="process" aria-labelledby="process-h">
+      <h2 id="process-h">How I build</h2>
+      <p>I learn by doing: I research a goal, configure the pieces, test the result, work through the problems, and document what I discover.</p>
+      <ol class="steps">
+        <li>Research</li><li>Configure</li><li>Test</li><li>Troubleshoot</li><li>Document</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>GitHub: <a href="https://github.com/makechristcool">github.com/makechristcool</a> &middot; <a href="https://github.com/makechristcool/homelab-media-servers">homelab-media-servers repository</a></p>
+    <p>Built as a companion to my resume. Project details will keep growing as I learn.</p>
+  </footer>
+</div>
+</body>
+</html>
